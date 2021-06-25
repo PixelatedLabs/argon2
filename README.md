@@ -44,9 +44,11 @@ Please report bugs as issues on this repository.
 ## Usage
 
 `make` builds the executable `argon2`, the static library `libargon2.a`,
-and the shared library `libargon2.so` (or `libargon2.dylib` on OSX).
-Make sure to run `make test` to verify that your build produces valid
-results. `make install PREFIX=/usr` installs it to your system.
+and the shared library `libargon2.so` (or on macOS, the dynamic library
+`libargon2.dylib` -- make sure to specify the installation prefix when
+you compile: `make PREFIX=/usr`). Make sure to run `make test` to verify
+that your build produces valid results. `sudo make install PREFIX=/usr`
+installs it to your system.
 
 ### Command-line utility
 
@@ -103,7 +105,7 @@ There are many additional parameters, but we will highlight three of them here.
    https://en.wikipedia.org/wiki/Hash-based_message_authentication_code).
    This allows a secret key to be input at hashing time (from some external
    location) and be folded into the value of the hash. This means that even if
-   your salts and hashes are compromized, an attacker cannot brute-force to find
+   your salts and hashes are compromised, an attacker cannot brute-force to find
    the password without the key.
 
 2. The `ad` parameter, which is used to fold any additional data into the hash
@@ -114,7 +116,7 @@ There are many additional parameters, but we will highlight three of them here.
    key only usable at hashing time. The `ad` is for any other data.
 
 3. The `flags` parameter, which determines which memory should be securely
-   erased. This is useful if you want to securly delete the `pwd` or `secret`
+   erased. This is useful if you want to securely delete the `pwd` or `secret`
    fields right after they are used. To do this set `flags` to either
    `ARGON2_FLAG_CLEAR_PASSWORD` or `ARGON2_FLAG_CLEAR_SECRET`. To change how
    internal memory is cleared, change the global flag
@@ -148,7 +150,7 @@ int main(void)
     uint8_t *pwd = (uint8_t *)strdup(PWD);
     uint32_t pwdlen = strlen((char *)pwd);
 
-    uint32_t t_cost = 2;            // 1-pass computation
+    uint32_t t_cost = 2;            // 2-pass computation
     uint32_t m_cost = (1<<16);      // 64 mebibytes memory usage
     uint32_t parallelism = 1;       // number of threads and lanes
 
@@ -244,6 +246,7 @@ Bindings are available for the following languages (make sure to read
 their documentation):
 
 * [Android (Java/Kotlin)](https://github.com/lambdapioneer/argon2kt) by [@lambdapioneer](https://github.com/lambdapioneer)
+* [Dart](https://github.com/tmthecoder/dargon2) by [@tmthecoder](https://github.com/tmthecoder)
 * [Elixir](https://github.com/riverrun/argon2_elixir) by [@riverrun](https://github.com/riverrun)
 * [Erlang](https://github.com/ergenius/eargon2) by [@ergenius](https://github.com/ergenius)
 * [Go](https://github.com/tvdburgt/go-argon2) by [@tvdburgt](https://github.com/tvdburgt)
@@ -269,6 +272,7 @@ their documentation):
 * [Perl](https://github.com/Leont/crypt-argon2) by [@leont](https://github.com/Leont)
 * [mruby](https://github.com/Asmod4n/mruby-argon2) by [@Asmod4n](https://github.com/Asmod4n)
 * [Swift](https://github.com/ImKcat/CatCrypto) by [@ImKcat](https://github.com/ImKcat)
+* [Swift](https://github.com/tmthecoder/Argon2Swift) by [@tmthecoder](https://github.com/tmthecoder)
 
 
 ## Test suite
